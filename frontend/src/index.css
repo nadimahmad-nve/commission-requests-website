@@ -1,0 +1,286 @@
+:root {
+  --bg-color: #0a0a0c; 
+  --text-main: #ffffff;
+  --neon-purple: #aa00ff; 
+  --neon-glow: 0 0 15px rgba(170, 0, 255, 0.5);
+  --panel-bg: #15151a; 
+}
+
+h1 {
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px; 
+  margin-top: -50px;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: system-ui, -apple-system, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; 
+  overflow-y: hidden;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+}
+
+.commission-form {
+  transition: box-shadow 0.3s ease-in-out;
+  background-color: #15151a;
+  padding: 40px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.commission-form:hover {
+  box-shadow: 0 0 25px rgba(147, 0, 245, 0.829);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+input, textarea {
+  background-color: #0a0a0c;
+  color: white;
+  padding: 12px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  font-family: inherit; 
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #aa00ff;
+}
+
+.submit-btn {
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid #aa00ff;
+  padding: 14px;
+  border-radius: 8px; 
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease-in-out;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  cursor: pointer;
+  background-color: #aa00ff;
+  color: white;
+  box-shadow: 0 0 20px rgba(170, 0, 255, 0.6);
+  transform: translateY(-2px); 
+}
+
+.social-links {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  display: flex;
+  gap: 20px;
+}
+
+.social-links a {
+  color: #888888; 
+  font-size: 28px; 
+  transition: all 0.3s ease-in-out;
+  display: flex; 
+}
+
+.social-links a:hover {
+  color: #aa00ff;
+  transform: translateY(-3px); 
+  filter: drop-shadow(0 0 10px rgba(170, 0, 255, 0.6));
+}
+
+.status-pill {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #15151a;
+  border: 1px solid #333;
+  padding: 8px 16px;
+  border-radius: 50px; 
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  user-select: none; 
+  transition: all 0.3s ease-in-out;
+}
+
+.status-pill:hover {
+  color: #00ff80;
+  transform: translateY(-1px); 
+  filter: drop-shadow(0 0 10px rgba(0, 255, 98, 0.3));
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #00ff00; 
+  border-radius: 50%;
+  animation: pulse 2s infinite; /* Animation */
+}
+
+/* Radar effect */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(0, 255, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 8px rgba(0, 255, 0, 0);
+  }
+}
+
+.spotify-widget {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #15151a;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid #333;
+  transition: all 0.3s ease-in-out;
+}
+
+.spotify-widget:hover {
+  border-color: #1DB954; /* Spotify Green */
+  box-shadow: 0 0 15px rgba(29, 185, 84, 0.2);
+  transform: translateY(-2px);
+}
+
+.spotify-icon {
+  color: #1DB954;
+  font-size: 22px; 
+  margin-left: 8px; 
+  animation: pulse-icon 2s infinite; 
+}
+
+.spotify-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.spotify-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #888888;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.spotify-song {
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+}
+
+@keyframes pulse-icon {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.album-cover {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); 
+}
+
+/* 3. Pulsating Stars Setup */
+.stars-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Clicks pass right through the stars */
+  z-index: 1;
+}
+
+.star {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  animation: star_pulse alternate infinite;
+}
+
+/* The glowing/pulsating animation */
+@keyframes star_pulse {
+  0% { 
+    opacity: 0.2; 
+    transform: scale(0.8); 
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1.2); 
+    box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.5); 
+  }
+}
+
+/* Base glow settings */
+.glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px); /* This massive blur creates the soft lighting */
+  z-index: 0; /* Keeps it behind your UI and stars */
+  pointer-events: none; /* Ensures you can still click the form through it */
+}
+
+/* Specific placements and colors */
+.glow-top-left {
+  width: 450px;
+  height: 450px;
+  background-color: rgba(138, 43, 226, 0.25); /* Lighter neon purple */
+  top: -100px;
+  left: -100px;
+}
+
+.glow-bottom-right {
+  width: 550px;
+  height: 550px;
+  background-color: rgba(75, 0, 130, 0.35); /* Deeper indigo */
+  bottom: -150px;
+  right: -100px;
+}
