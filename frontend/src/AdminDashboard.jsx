@@ -34,19 +34,33 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="admin-panel" style={{ color: "white", padding: "20px" }}>
-      <h1>Commission Dashboard</h1>
+    <div 
+      className="admin-panel" 
+      style={{ 
+        color: "white", 
+        padding: "40px", 
+        width: "100%",           // Forces the container to expand out of the center
+        maxWidth: "1200px",      // Prevents the grid from getting too wide on large monitors
+        margin: "0 auto",        // Keeps the whole container centered on the screen
+        boxSizing: "border-box" 
+      }}
+    >
+      {/* Title centered at the top */}
+      <h1 style={{ textAlign: "center", marginBottom: "40px", fontSize: "2.5rem" }}>
+        Commission Dashboard
+      </h1>
 
       {commissions.length === 0 ? (
-        <p>No commissions yet.</p>
+        <p style={{ textAlign: "center", color: "#9ca3af" }}>No commissions yet.</p>
       ) : (
         <div
           className="commission-grid"
           style={{
             display: "grid",
             gap: "20px",
+            // This is the magic line that fills left-to-right, wrapping to new rows
             gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-            marginTop: "20px",
+            alignItems: "start"  // Prevents cards from stretching vertically to match taller cards
           }}
         >
           {commissions.map((comm) => (
@@ -62,22 +76,13 @@ export default function AdminDashboard() {
                 boxShadow: "0 4px 6px rgba(0,0,0,0.3)",
               }}
             >
-              {/* Header: Name and Status Badge */}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
-                  marginBottom: "10px",
-                }}
-              >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "10px" }}>
                 <h3 style={{ margin: 0, fontSize: "1.2rem", color: "#fff" }}>
                   {comm.client_name}
                 </h3>
                 <span
                   style={{
-                    backgroundColor:
-                      comm.status === "Pending" ? "#b45309" : "#15803d",
+                    backgroundColor: comm.status === "Pending" ? "#b45309" : "#15803d",
                     color: "white",
                     padding: "4px 10px",
                     borderRadius: "12px",
@@ -90,51 +95,20 @@ export default function AdminDashboard() {
                 </span>
               </div>
 
-              {/* Details */}
-              <p
-                style={{
-                  margin: "0 0 10px 0",
-                  color: "#9ca3af",
-                  fontSize: "0.9rem",
-                }}
-              >
+              <p style={{ margin: "0 0 10px 0", color: "#9ca3af", fontSize: "0.9rem" }}>
                 Discord: <span style={{ color: "#cbd5e1" }}>{comm.discord_tag}</span>
               </p>
 
-              <p
-                style={{
-                  margin: "0 0 15px 0",
-                  fontSize: "1.2rem",
-                  fontWeight: "bold",
-                  color: "#4ade80",
-                }}
-              >
+              <p style={{ margin: "0 0 15px 0", fontSize: "1.2rem", fontWeight: "bold", color: "#4ade80" }}>
                 ${comm.budget}
               </p>
 
-              {/* Description */}
-              <div
-                style={{
-                  flexGrow: 1,
-                  backgroundColor: "#2d2d2d",
-                  padding: "12px",
-                  borderRadius: "6px",
-                  marginBottom: "15px",
-                }}
-              >
-                <p
-                  style={{
-                    margin: 0,
-                    color: "#e5e7eb",
-                    fontSize: "0.95rem",
-                    lineHeight: "1.5",
-                  }}
-                >
+              <div style={{ flexGrow: 1, backgroundColor: "#2d2d2d", padding: "12px", borderRadius: "6px", marginBottom: "15px" }}>
+                <p style={{ margin: 0, color: "#e5e7eb", fontSize: "0.95rem", lineHeight: "1.5" }}>
                   {comm.description}
                 </p>
               </div>
 
-              {/* Action Buttons */}
               <button
                 onClick={() => handleDelete(comm.id)}
                 style={{
