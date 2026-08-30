@@ -41,7 +41,7 @@ def get_db():
 
 @app.get("/")
 def read_root():
-    return {"message": "Hello from the Python Backend! The kitchen is open."}
+    return {"message": "Backend running"}
 
 @app.post("/api/commissions")
 def send_commission(new_commission : CommissionRequest, db : Session = Depends(get_db)):

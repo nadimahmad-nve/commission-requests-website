@@ -33,7 +33,8 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  transition: box-shadow 0.3s ease-in-out;;
+  transition: box-shadow 0.3s ease-in-out;
+  z-index: 2;
 }
 
 .commission-card:hover {
@@ -118,4 +119,120 @@
 
 .delete-btn:hover {
   background-color: #dc2626;
+}
+
+.stars-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; 
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  animation: star_pulse alternate infinite;
+}
+
+@keyframes star_pulse {
+  0% { 
+    opacity: 0.2; 
+    transform: scale(0.8); 
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1.2); 
+    box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.5); 
+  }
+}
+
+/* =========================================
+   STATUS BADGES
+========================================= */
+.status-badge {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px; /* Creates the perfect pill shape */
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  /* This is the magic line! When React changes the class, 
+     the browser smoothly crossfades the colors instead of snapping. */
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Yellow/Orange for Pending */
+.status-pending {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+}
+
+/* Blue for In Progress */
+.status-progress {
+  background-color: #cce5ff;
+  color: #004085;
+  border: 1px solid #b8daff;
+}
+
+/* Green for Completed */
+.status-completed {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+
+/* =========================================
+   ACTION BUTTONS
+========================================= */
+.card-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.update-btn, .delete-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Adds a satisfying little "press down" animation when clicked */
+.update-btn:active, .delete-btn:active {
+  transform: scale(0.95); 
+}
+
+/* The primary action button gets a bold color (Indigo) */
+.update-btn {
+  background-color: #4f46e5; 
+  color: white;
+  flex: 1; /* Tells the button to stretch and fill the available space */
+}
+
+.update-btn:hover {
+  background-color: #4338ca;
+}
+
+/* The delete button gets a softer, but clearly dangerous color */
+.delete-btn {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.delete-btn:hover {
+  background-color: #fecaca;
 }
