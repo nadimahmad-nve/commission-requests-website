@@ -1,6 +1,6 @@
 import os 
 import requests
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, Header
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel 
@@ -37,7 +37,12 @@ def get_db():
         yield(db)
     finally:
         db.close()
-        
+
+def verify_admin(x_admin_password: str = Header(None)):
+    correct_password = os.getenv("ADMIN_PASSWORD")
+    
+    if x_admin_password != correct_password:
+        raise HTTPException(status_code=401, detail="Unauthorized: Incorrect password")
 
 @app.get("/")
 def read_root():
@@ -53,7 +58,7 @@ def send_commission(new_commission : CommissionRequest, db : Session = Depends(g
     return db_commission
 
 @app.get("/api/commissions")
-def get_all_commissions(db : Session = Depends(get_db)):
+def get_all_commissions(db : Session = Depends(get_db), admin: None = Depends(verify_admin)):
     all_commissions = db.query(models.Commission).all()
     return all_commissions
 
@@ -101,7 +106,7 @@ def get_currently_playing():
         return {"error": f"Error parsing data: {str(e)}"}
 
 @app.delete("/api/commissions/{commission_id}")
-def delete_commission(commission_id: int, db: Session = Depends(get_db)):
+def delete_commission(commission_id: int, db: Session = Depends(get_db), admin: None = Depends(verify_admin)):
     commission_to_delete = db.query(models.Commission).filter(models.Commission.id == commission_id).first()
     if not commission_to_delete:
         raise HTTPException(status_code=404, detail="Commission not found")
@@ -112,7 +117,7 @@ def delete_commission(commission_id: int, db: Session = Depends(get_db)):
     return {"message": f"Commission {commission_id} deleted from database successfully."}
 
 @app.patch("/api/commissions/{commission_id}")
-def update_commission_status(commission_id: int, status_data: StatusUpdate, db: Session = Depends(get_db)):
+def update_commission_status(commission_id: int, status_data: StatusUpdate, db: Session = Depends(get_db), admin: None = Depends(verify_admin)):
     commission_to_update = db.query(models.Commission).filter(models.Commission.id == commission_id).first()
 
     if not commission_to_update: 

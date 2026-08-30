@@ -236,3 +236,91 @@
 .delete-btn:hover {
   background-color: #fecaca;
 }
+
+.glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px); 
+  z-index: 0; 
+  pointer-events: none; 
+}
+
+.glow-top-left {
+  width: 450px;
+  height: 450px;
+  background-color: rgba(138, 43, 226, 0.25); 
+  top: -100px;
+  left: -100px;
+}
+
+.glow-bottom-right {
+  width: 550px;
+  height: 550px;
+  background-color: rgba(75, 0, 130, 0.35); 
+  bottom: -150px;
+  right: -100px;
+}
+
+/* =========================================
+   LOGIN SCREEN
+========================================= */
+
+/* 1. The Full-Page Background */
+.login-screen {
+  display: flex;
+  justify-content: center; /* Centers the card horizontally */
+  align-items: center;     /* Centers the card vertically */
+  height: 100vh;           /* Takes up 100% of the browser window height */
+  background-color: #f3f4f6; /* A soft gray background */
+}
+
+/* 2. The Login Card */
+.login-form {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Adds a soft shadow behind the card */
+  display: flex;
+  flex-direction: column; /* Stacks the title, input, and button vertically */
+  gap: 20px;              /* Adds consistent spacing between the elements */
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-form h2 {
+  margin: 0;
+  text-align: center;
+  color: #1f2937;
+}
+
+/* 3. The Password Input Box */
+.login-form input {
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+/* Turns the border blue when you click inside the text box */
+.login-form input:focus {
+  border-color: #4f46e5;
+}
+
+/* 4. The Login Button */
+.login-form button {
+  padding: 12px;
+  background-color: #4f46e5;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.login-form button:hover {
+  background-color: #4338ca;
+}

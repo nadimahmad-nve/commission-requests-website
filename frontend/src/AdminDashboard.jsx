@@ -4,26 +4,44 @@ import "./AdminDashboard.css";
 export default function AdminDashboard() {
   const [commissions, setCommissions] = useState([]);
 
-  useEffect(() => {
-    const fetchCommissions = async () => {
-      try {
-        const response = await fetch("http://127.0.0.1:8000/api/commissions");
-        if (response.ok) {
-          const data = await response.json();
-          setCommissions(data);
-        }
-      } catch (error) {
-        console.error("Failed to fetch commissions:", error);
-      }
-    };
+  const [passwordInput, setPasswordInput] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [adminToken, setAdminToken] = useState("");
 
-    fetchCommissions();
-  }, []);
+  const fetchCommissions = async (tokenToTry) => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/commissions", {
+        headers : {
+          "x-admin-password" : tokenToTry 
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setCommissions(data);
+        setIsAuthenticated(true);
+        setAdminToken(tokenToTry);
+      } else { 
+        alert("Incorrect password!");
+      }
+    } catch (error) {
+      console.error("Failed to fetch commissions:", error);
+    }
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault(); 
+    fetchCommissions(passwordInput); 
+  }
+  
 
   const handleDelete = async (id) => {
     try {
       const response = await fetch(`http://127.0.0.1:8000/api/commissions/${id}`, {
         method: "DELETE",
+        headers: {
+          "x-admin-password": adminToken 
+        }
       });
 
       if (response.ok) {
@@ -41,6 +59,7 @@ export default function AdminDashboard() {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          "x-admin-password": adminToken
         },
         body: JSON.stringify({ status: newStatus }),
       });
@@ -82,9 +101,29 @@ export default function AdminDashboard() {
     return "Update"; 
   };
 
+  if (!isAuthenticated) {
+    return (
+      <div className ="login-screen">
+        <form onSubmit={handleLogin} className="login-form">
+          <h2> Admin Login </h2>
+          <input 
+            type="password"
+            value={passwordInput}
+            onChange={(e) => setPasswordInput(e.target.value)}
+            placeholder="Enter password"
+          />
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    )
+  }
+
   return (
     <div className="admin-panel">
       <h1 className="admin-title">Commission Dashboard</h1>
+ 
+      <div className="glow-blob glow-top-left"></div>
+      <div className="glow-blob glow-bottom-right"></div>
 
       <div className="stars-layer">
         <div className="star" style={{ top: '15%', left: '20%', width: '3px', height: '3px', animationDuration: '2s' }}></div>
@@ -138,7 +177,6 @@ export default function AdminDashboard() {
                   Delete
                 </button>
               </div>
-              
             </div>
           ))}
         </div>
