@@ -1,6 +1,6 @@
 import os 
 import requests
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel 
@@ -28,7 +28,9 @@ class CommissionRequest(BaseModel):
     description: str
     budget: int
 
-    
+class StatusUpdate(BaseModel):
+    status: str
+
 def get_db():
     db = SessionLocal()
     try:
@@ -97,3 +99,26 @@ def get_currently_playing():
         }
     except Exception as e:
         return {"error": f"Error parsing data: {str(e)}"}
+
+@app.delete("/api/commissions/{commission_id}")
+def delete_commission(commission_id: int, db: Session = Depends(get_db)):
+    commission_to_delete = db.query(models.Commission).filter(models.Commission.id == commission_id).first()
+    if not commission_to_delete:
+        raise HTTPException(status_code=404, detail="Commission not found")
+
+    db.delete(commission_to_delete)
+    db.commit()
+
+    return {"message": f"Commission {commission_id} deleted from database successfully."}
+
+@app.patch("/api/commissions/{commission_id}")
+def update_commission_status(commission_id: int, status_data: StatusUpdate, db: Session = Depends(get_db)):
+    commission_to_update = db.query(models.Commission).filter(models.Commission.id == commission_id).first()
+
+    if not commission_to_update: 
+        raise HTTPException(status_code=404, detail="Commission not found")
+
+    commission_to_update.status = status_data.status
+
+    db.commit()
+    db.refresh(commission_to_update)

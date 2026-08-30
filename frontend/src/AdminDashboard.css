@@ -94,6 +94,8 @@
   padding: 12px;
   border-radius: 6px;
   margin-bottom: 15px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .description-text {
