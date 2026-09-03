@@ -271,12 +271,12 @@
   justify-content: center; /* Centers the card horizontally */
   align-items: center;     /* Centers the card vertically */
   height: 100vh;           /* Takes up 100% of the browser window height */
-  background-color: #f3f4f6; /* A soft gray background */
+  background-color: #000000; /* A soft gray background */
 }
 
 /* 2. The Login Card */
 .login-form {
-  background: white;
+  background: rgba(255, 255, 255, 0.221);
   padding: 40px;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Adds a soft shadow behind the card */
@@ -290,7 +290,7 @@
 .login-form h2 {
   margin: 0;
   text-align: center;
-  color: #1f2937;
+  color: #d9dbdc;
 }
 
 /* 3. The Password Input Box */
