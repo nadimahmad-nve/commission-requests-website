@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd backend
-          pip install fastapi uvicorn sqlalchemy httpx pytest
+          pip install fastapi uvicorn sqlalchemy httpx pytest requests
 
       - name: Run Pytest
         run: |
