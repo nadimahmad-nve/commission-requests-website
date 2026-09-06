@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # --- DATABASE ---
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: commission_db
+    ports:
+      - "5432:5432"
+
+  # --- BACKEND ---
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      SQL_ALCHEMY_DATABASE_URL: "postgresql://admin:secretpassword@db:5432/commission_db"
+    depends_on:
+      - db
+
+  # --- FRONTEND ---
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
