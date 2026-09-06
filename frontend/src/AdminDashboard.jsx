@@ -52,7 +52,6 @@ export default function AdminDashboard() {
     }
   };
 
-  // 1. New function to handle the PATCH request
   const handleStatusUpdate = async (id, newStatus) => {
     try {
       const response = await fetch(`http://127.0.0.1:8000/api/commissions/${id}`, {
@@ -85,7 +84,6 @@ export default function AdminDashboard() {
     return "status-active"; 
   };
 
-  // 1. Figures out the next status in the cycle
   const getNextStatus = (currentStatus) => {
     if (currentStatus === "Pending") return "In Progress";
     if (currentStatus === "In Progress") return "Completed";
