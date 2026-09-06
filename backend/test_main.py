@@ -43,7 +43,7 @@ def test_get_empty_commissions():
     assert response.json() == []
 
 def test_create_commission():
-    response = client.post("/api/commissions", json={"client_name": "Test Client", "discord_tag": "test#1234", "description": "A new project", "budget": 50})
+    response = client.post("/api/commissions", json={"client_name": "Test Client", "discord_tag": "test#1234", "description": "A new project", "budget": 50, "status": "Pending"})
 
     assert response.status_code == 200 
 
