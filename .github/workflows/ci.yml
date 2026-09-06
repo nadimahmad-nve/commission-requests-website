@@ -23,6 +23,8 @@ jobs:
           pip install fastapi uvicorn sqlalchemy httpx pytest requests dotenv 
 
       - name: Run Pytest
+        env:
+          SQL_ALCHEMY_DATABASE_URL: "sqlite:///./dummy.db"
         run: |
           cd backend
           python -m pytest
