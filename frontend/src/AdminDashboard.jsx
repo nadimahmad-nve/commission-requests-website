@@ -91,7 +91,6 @@ export default function AdminDashboard() {
     return "Pending"; // Fallback
   };
 
-  // 2. Changes the text on the button so you know what clicking it will do
   const getButtonText = (currentStatus) => {
     if (currentStatus === "Pending") return "Start Work";
     if (currentStatus === "In Progress") return "Mark Completed";
@@ -142,7 +141,6 @@ export default function AdminDashboard() {
               
               <div className="card-header">
                 <h3 className="client-name">{comm.client_name}</h3>
-                {/* 2. Dynamic class for the badge */}
                 <span className={`status-badge ${getStatusClass(comm.status)}`}>
                   {comm.status}
                 </span>
@@ -158,9 +156,7 @@ export default function AdminDashboard() {
                 <p className="description-text">{comm.description}</p>
               </div>
 
-              {/* 3. Button layout for status updates and deletion */}
               <div className="card-actions">
-                {/* One button to rule them all */}
                 <button
                   onClick={() => handleStatusUpdate(comm.id, getNextStatus(comm.status))}
                   className="update-btn"
