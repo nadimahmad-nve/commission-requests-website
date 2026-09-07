@@ -28,7 +28,7 @@ The easiest way to run the application is via Docker Compose, which will automat
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/your-username/commission-requests-website.git](https://github.com/your-username/commission-requests-website.git)
+   git clone (https://github.com/your-username/commission-requests-website.git)
    cd commission-requests-website
    ```
 
