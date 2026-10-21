@@ -1,4 +1,3 @@
-// 1. Add fireEvent to your imports
 import { render, screen, fireEvent } from '@testing-library/react';
 import { vi } from 'vitest';
 import AdminDashboard from './AdminDashboard';
